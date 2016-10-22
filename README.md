@@ -1,7 +1,8 @@
 #Simple Logger 
 
-Instead of using printf every where and delete them later. Use logger instead.
-In the python code, whenever you want to put a debug point in it, use:
+Instead of using printf everywhere and deleting them later, try to use logger
+instead. In your python codes, wherever you want to put a debug point,
+use:
 
 ```python
 lg.debug("Hi, test here")
@@ -18,11 +19,16 @@ Execute this line:
 python show_case.py --debug
 ```
 
-When you want to run stress test, you want to ignore the debug points. All you
-need to do is not to turn on debug point.
+When you want to run stress tests, you can ignore the debug points by not
+turning on debug flag in the command line:
 
-#Try these commands, they can show different levels of logs that you want to
-see. Remember error will always show up!!!
+```python
+python show_case.py
+```
+
+#Try these commands
+They will show different levels of logs that you want to see. Remember, errors
+will always show up!!!
 
 ```bash
 python show_case.py --debug
@@ -30,7 +36,7 @@ python show_case.py --info
 python show_case.py --error
 ```
 
-#To use it
-Simply put log_style.py in your folder and import it in the main function of
-your python script. See show_case.py
+#How to use it
+Simply put log_style.py in your folder and import it in the main function. See
+show_case.py
 
