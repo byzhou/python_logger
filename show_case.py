@@ -1,5 +1,7 @@
-from log_style import *
+if __name__ == "__main__":
 
-lg.debug("Hi, this is a bug!")
-lg.error("Hi, there is an error!")
-lg.info("Hi, some info!")
+    from log_style import *
+
+    lg.debug("Hi, this is a bug!")
+    lg.error("Hi, there is an error!")
+    lg.info("Hi, some info!")
