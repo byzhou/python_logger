@@ -41,24 +41,24 @@ class bcolors:
 # Custom formatter
 class MyFormatter(lg.Formatter):
 
-    err_fmt  = bcolors.HEADER  + ' %(asctime)s'        + bcolors.ENDC +\
-                bcolors.OKBLUE  + ' %(filename)s'       + bcolors.ENDC +\
+    err_fmt  = bcolors.HEADER   + ' %(asctime)s'        + bcolors.ENDC +\
+                bcolors.FAIL    + ' [%(levelname)s] '   + bcolors.ENDC +\
+                bcolors.WARNING + ' %(message)s'        + bcolors.ENDC +\
+                bcolors.OKBLUE  + '(%(filename)s'       + bcolors.ENDC +\
                 bcolors.OKBLUE  + ' :: %(funcName)s'    + bcolors.ENDC +\
-                bcolors.OKBLUE  + ' :: %(lineno)s'      + bcolors.ENDC +\
-                bcolors.FAIL + '\t\t[%(levelname)s]'    + bcolors.ENDC +\
-                bcolors.WARNING + ' %(message)s'        + bcolors.ENDC
-    dbg_fmt  = bcolors.HEADER  + ' %(asctime)s'        + bcolors.ENDC +\
-                bcolors.OKBLUE  + ' %(filename)s'       + bcolors.ENDC +\
+                bcolors.OKBLUE  + ' :: %(lineno)s)'     + bcolors.ENDC 
+    dbg_fmt  = bcolors.HEADER   + ' %(asctime)s'        + bcolors.ENDC +\
+                bcolors.OKGREEN + ' [%(levelname)s] '   + bcolors.ENDC +\
+                bcolors.WARNING + ' %(message)s'        + bcolors.ENDC +\
+                bcolors.OKBLUE  + '(%(filename)s'       + bcolors.ENDC +\
                 bcolors.OKBLUE  + ' :: %(funcName)s'    + bcolors.ENDC +\
-                bcolors.OKBLUE  + ' :: %(lineno)s'      + bcolors.ENDC +\
-                bcolors.OKGREEN + '\t\t[%(levelname)s]' + bcolors.ENDC +\
-                bcolors.WARNING + ' %(message)s'        + bcolors.ENDC
-    info_fmt = bcolors.HEADER  + ' %(asctime)s'        + bcolors.ENDC +\
-                bcolors.OKBLUE  + ' %(filename)s'       + bcolors.ENDC +\
+                bcolors.OKBLUE  + ' :: %(lineno)s)'     + bcolors.ENDC
+    info_fmt = bcolors.HEADER   + ' %(asctime)s'        + bcolors.ENDC +\
+                bcolors.HEADER  + ' [%(levelname)s] '   + bcolors.ENDC +\
+                bcolors.WARNING + ' %(message)s'        + bcolors.ENDC +\
+                bcolors.OKBLUE  + ' (%(filename)s'      + bcolors.ENDC +\
                 bcolors.OKBLUE  + ' :: %(funcName)s'    + bcolors.ENDC +\
-                bcolors.OKBLUE  + ' :: %(lineno)s'      + bcolors.ENDC +\
-                bcolors.HEADER  + '\t\t[%(levelname)s]' + bcolors.ENDC +\
-                bcolors.WARNING + ' %(message)s'        + bcolors.ENDC
+                bcolors.OKBLUE  + ' :: %(lineno)s)'     + bcolors.ENDC 
 
 
     def __init__(self, fmt="%(levelno)s: %(msg)s"):
