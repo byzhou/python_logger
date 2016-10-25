@@ -1,64 +1,38 @@
 import logging as lg
-import argparse
 import sys
-
-parser = argparse.ArgumentParser()
-parser.add_argument(
-    '-d', '--debug',
-    help="Print all the Debugging, info, error logs",
-    action="store_const", dest="loglevel", const=lg.DEBUG,
-    default=lg.WARNING,
-)
-parser.add_argument(
-    '-i', '--info',
-    help="Print all the info, error logs",
-    action="store_const", dest="loglevel", const=lg.INFO,
-    default=lg.WARNING,
-)
-parser.add_argument(
-    '-e', '--error',
-    help="Print all the error logs",
-    action="store_const", dest="loglevel", const=lg.ERROR,
-    default=lg.WARNING,
-)
-parser.add_argument(
-    '-v', '--verbose',
-    help="Be verbose",
-    action="store_const", dest="loglevel", const=lg.INFO,
-)
-args = parser.parse_args()    
+import argparse
 
 class bcolors:
-    HEADER = '\033[95m'
-    OKBLUE = '\033[94m'
-    OKGREEN = '\033[92m'
-    WARNING = '\033[93m'
-    FAIL = '\033[91m'
-    ENDC = '\033[0m'
-    BOLD = '\033[1m'
-    UNDERLINE = '\033[4m'
+    HEADER = "\033[95m"
+    OKBLUE = "\033[94m"
+    OKGREEN = "\033[92m"
+    WARNING = "\033[93m"
+    FAIL = "\033[91m"
+    ENDC = "\033[0m"
+    BOLD = "\033[1m"
+    UNDERLINE = "\033[4m"
 
 # Custom formatter
 class MyFormatter(lg.Formatter):
 
-    err_fmt  = bcolors.HEADER   + ' %(asctime)s'        + bcolors.ENDC +\
-                bcolors.FAIL    + ' [%(levelname)s] '   + bcolors.ENDC +\
-                bcolors.WARNING + ' %(message)s'        + bcolors.ENDC +\
-                bcolors.OKBLUE  + '(%(filename)s'       + bcolors.ENDC +\
-                bcolors.OKBLUE  + ' :: %(funcName)s'    + bcolors.ENDC +\
-                bcolors.OKBLUE  + ' :: %(lineno)s)'     + bcolors.ENDC 
-    dbg_fmt  = bcolors.HEADER   + ' %(asctime)s'        + bcolors.ENDC +\
-                bcolors.OKGREEN + ' [%(levelname)s] '   + bcolors.ENDC +\
-                bcolors.WARNING + ' %(message)s'        + bcolors.ENDC +\
-                bcolors.OKBLUE  + '(%(filename)s'       + bcolors.ENDC +\
-                bcolors.OKBLUE  + ' :: %(funcName)s'    + bcolors.ENDC +\
-                bcolors.OKBLUE  + ' :: %(lineno)s)'     + bcolors.ENDC
-    info_fmt = bcolors.HEADER   + ' %(asctime)s'        + bcolors.ENDC +\
-                bcolors.HEADER  + ' [%(levelname)s] '   + bcolors.ENDC +\
-                bcolors.WARNING + ' %(message)s'        + bcolors.ENDC +\
-                bcolors.OKBLUE  + ' (%(filename)s'      + bcolors.ENDC +\
-                bcolors.OKBLUE  + ' :: %(funcName)s'    + bcolors.ENDC +\
-                bcolors.OKBLUE  + ' :: %(lineno)s)'     + bcolors.ENDC 
+    err_fmt  = bcolors.HEADER   + " %(asctime)s"        + bcolors.ENDC +\
+                bcolors.FAIL    + " [%(levelname)s] "   + bcolors.ENDC +\
+                bcolors.WARNING + " %(message)s "       + bcolors.ENDC +\
+                bcolors.OKBLUE  + "(%(filename)s"       + bcolors.ENDC +\
+                bcolors.OKBLUE  + " :: %(funcName)s"    + bcolors.ENDC +\
+                bcolors.OKBLUE  + " :: %(lineno)s)"     + bcolors.ENDC 
+    dbg_fmt  = bcolors.HEADER   + " %(asctime)s"        + bcolors.ENDC +\
+                bcolors.OKGREEN + " [%(levelname)s] "   + bcolors.ENDC +\
+                bcolors.WARNING + " %(message)s "       + bcolors.ENDC +\
+                bcolors.OKBLUE  + "(%(filename)s"       + bcolors.ENDC +\
+                bcolors.OKBLUE  + " :: %(funcName)s"    + bcolors.ENDC +\
+                bcolors.OKBLUE  + " :: %(lineno)s)"     + bcolors.ENDC
+    info_fmt = bcolors.HEADER   + " %(asctime)s"        + bcolors.ENDC +\
+                bcolors.HEADER  + " [%(levelname)s] "   + bcolors.ENDC +\
+                bcolors.WARNING + " %(message)s "       + bcolors.ENDC +\
+                bcolors.OKBLUE  + " (%(filename)s"      + bcolors.ENDC +\
+                bcolors.OKBLUE  + " :: %(funcName)s"    + bcolors.ENDC +\
+                bcolors.OKBLUE  + " :: %(lineno)s)"     + bcolors.ENDC 
 
 
     def __init__(self, fmt="%(levelno)s: %(msg)s"):
@@ -89,18 +63,41 @@ class MyFormatter(lg.Formatter):
 
         return result
 
-fmt = MyFormatter()
-hdlr = lg.StreamHandler(sys.stdout)
+def set_up_formatter(log_level=lg.INFO):
+    fmt = MyFormatter()
+    hdlr = lg.StreamHandler(sys.stdout)
 
-hdlr.setFormatter(fmt)
-lg.root.addHandler(hdlr)
-lg.root.setLevel(args.loglevel)
-"""
-lg.basicConfig(format = bcolors.HEADER  + ' %(asctime)s'        + bcolors.ENDC +\
-                        bcolors.OKBLUE  + ' %(filename)s'       + bcolors.ENDC +\
-                        bcolors.OKBLUE  + ' :: %(funcName)s'    + bcolors.ENDC +\
-                        bcolors.OKBLUE  + ' :: %(lineno)s'      + bcolors.ENDC +\
-                        bcolors.OKGREEN + '\t\t[%(levelname)s]' + bcolors.ENDC +\
-                        bcolors.WARNING + ' %(message)s'        + bcolors.ENDC \
-                        , level=args.loglevel)
-"""
+    hdlr.setFormatter(fmt)
+    lg.root.addHandler(hdlr)
+    lg.root.setLevel(log_level)
+
+def set_up_parser():
+    parser = argparse.ArgumentParser()
+    parser.add_argument(
+        "-d", "--debug",
+        help="Print all the Debugging, info, error logs",
+        action="store_const", dest="loglevel", const=lg.DEBUG,
+        default=lg.WARNING,
+    )
+    parser.add_argument(
+        "-i", "--info",
+        help="Print all the info, error logs",
+        action="store_const", dest="loglevel", const=lg.INFO,
+        default=lg.WARNING,
+    )
+    parser.add_argument(
+        "-e", "--error",
+        help="Print all the error logs",
+        action="store_const", dest="loglevel", const=lg.ERROR,
+        default=lg.WARNING,
+    )
+    parser.add_argument(
+        "-v", "--verbose",
+        help="Be verbose",
+        action="store_const", dest="loglevel", const=lg.INFO,
+    )
+    args = parser.parse_args()    
+    set_up_formatter(args.loglevel)
+
+if __name__ == "__main__":
+    set_up_parser()
